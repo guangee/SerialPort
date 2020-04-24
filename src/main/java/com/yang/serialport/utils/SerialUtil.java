@@ -29,7 +29,7 @@ public class SerialUtil {
 
         log.info("串口已经打开,等待接收数据");
         SerialPortManager.addListener(serialPort, () -> {
-            String content = new String(SerialPortManager.readFromPort(serialPort));
+            String content = new String(SerialPortManager.readFromPort(serialPort)).trim();
             if (StringUtils.isBlank(content)) {
                 log.info("read unused content");
                 return;
