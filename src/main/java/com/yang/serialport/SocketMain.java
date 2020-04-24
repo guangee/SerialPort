@@ -1,4 +1,4 @@
-package com.yang.serialport.ui;
+package com.yang.serialport;
 
 import com.yang.serialport.utils.SerialUtil;
 import com.yang.serialport.utils.SocketUtil;
