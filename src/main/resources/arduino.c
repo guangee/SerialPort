@@ -52,6 +52,13 @@ void loop() {
     Serial.flush();
   }
   //temperature-humidity
-  Serial.println("66.7-88.99");
+  float h = dht.readHumidity();//读湿度
+    float t = dht.readTemperature();//读温度，默认为摄氏度
+    float h1 = h*100;
+    float t1 = t*100;
+    long h2 = (long) h1;
+    long t2 = (long) t1;
+    long data=h2*10000+t2;
+    Serial.println(data, DEC);
 
 }

@@ -29,14 +29,14 @@ public class SerialUtil {
 
         log.info("串口已经打开,等待接收数据");
         SerialPortManager.addListener(serialPort, () -> {
-            byte[] data = SerialPortManager.readFromPort(serialPort);
-            String content = new String(data);
+            String content = new String(SerialPortManager.readFromPort(serialPort));
             if (StringUtils.isBlank(content)) {
                 log.info("read unused content");
                 return;
             }
-            double temperature = NumberUtils.toDouble(content.split("-")[0]);
-            double humidity = NumberUtils.toDouble(content.split("-")[1]);
+            int data = NumberUtils.toInt(content);
+            double temperature = data / 1000000.00;
+            double humidity = (data % 10000) / 100.00;
             if (temperature == 0 || humidity == 0) {
                 log.info("read unused content:{}", content);
                 return;
@@ -45,8 +45,7 @@ public class SerialUtil {
             reportParam.setHumidity(humidity);
             reportParam.setTemperature(temperature);
             sendReportData(reportParam);
-
-            log.info(new String(data));
+            log.info("data:{}", data);
         });
 
     }
