@@ -40,17 +40,18 @@ void loop() {
     Serial.flush();
 
     Serial.println(control, DEC);
-    lampOne = (control > 3) % 2;
-    lampTwo = (control > 2) % 2;
-    lampThree = (control > 1) % 2;
+    lampOne = (control >> 3) % 2;
+    lampTwo = (control >> 2) % 2;
+    lampThree = (control >> 1) % 2;
     FanOne = control % 2;
 
-    Serial.print(lampOne ? "lampOne on " : "lampOne off ");
-    Serial.print(lampTwo ? "lampTwo on " : "lampTwo off ");
-    Serial.print(lampThree ? "lampThree on " : "lampThree off ");
-    Serial.println(FanOne ? "FanOne on " : "FanOne off ");
+    //Serial.print(lampOne ? "lampOne on " : "lampOne off ");
+    //Serial.print(lampTwo ? "lampTwo on " : "lampTwo off ");
+    //Serial.print(lampThree ? "lampThree on " : "lampThree off ");
+    //Serial.println(FanOne ? "FanOne on " : "FanOne off ");
     Serial.flush();
   }
-  Serial.println("wendu:66,shidu:88");
+  //temperature-humidity
+  Serial.println("66.7-88.99");
 
 }
