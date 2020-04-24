@@ -73,6 +73,7 @@ public class SerialUtil {
     }
 
     public void write(Character control) {
+        log.info("接收到来自服务器的控制命令:{}", control);
         SerialPortManager.sendToPort(serialPort, String.valueOf(control).getBytes());
     }
 }

@@ -84,8 +84,8 @@ public class SocketUtil {
         return (char) ('A' + n);
     }
 
-    public void report(ReportParam reportParam) {
-        if (reportParam == null) {
+    public void report(ReportParam report) {
+        if (report == null) {
             log.info("report Param can not be null");
             return;
         }
@@ -93,8 +93,9 @@ public class SocketUtil {
             log.info("clientId can not be null");
             return;
         }
+        log.info("读取到单片机上报的温度湿度数据：{}", report);
         PushMessage pushMessage = new PushMessage();
-        pushMessage.setReport(reportParam);
+        pushMessage.setReport(report);
         pushMessage.setClientId(clientId);
         pushMessage.setType(2);
         socket.emit("client_event", JsonUtil.toJson(pushMessage));

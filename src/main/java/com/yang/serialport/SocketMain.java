@@ -18,16 +18,10 @@ public class SocketMain {
         SocketUtil socketInstance = SocketUtil.getInstance(SERVER_URL);
         SerialUtil serialInstance = SerialUtil.getInstance(PORT_NAME, BAUD_RATE);
 
-        socketInstance.addOnControlListener(control -> {
-            //接收到来自服务器的控制命令，在这里将命令下发下去
-            log.info("接收到来自服务器的控制命令:{}", control);
-            serialInstance.write(control);
-        });
-
-        serialInstance.addOnReportListener(report -> {
-            log.info("读取到单片机上报的温度湿度数据：{}", report);
-            socketInstance.report(report);
-        });
+        //接收到来自服务器的控制命令，在这里将命令下发下去
+        socketInstance.addOnControlListener(serialInstance::write);
+        //接收到来自单片机上报的数据，在这里讲数据发送给服务器
+        serialInstance.addOnReportListener(socketInstance::report);
     }
 
 
